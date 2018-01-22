@@ -1,11 +1,11 @@
 import Lobby from './Lobby'
-import classroom from './classroom'
+import classrooms from './classrooms'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 
 export {
   Lobby,
-  classroom,
+  classrooms,
   SignIn,
   SignUp,
 }

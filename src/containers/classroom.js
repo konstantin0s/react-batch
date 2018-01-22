@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { fetchOneclassroom, fetchstudents } from '../actions/classrooms/fetch'
-import patchclassroom from '../actions/classrooms/patch'
+import { fetchOneClassroom, fetchStudents } from '../actions/classrooms/fetch'
+import patchClassroom from '../actions/classrooms/patch'
 import { connect as subscribeToWebsocket } from '../actions/websocket'
-import JoinclassroomDialog from '../components/classrooms/JoinclassroomDialog'
+import JoinClassroomDialog from '../components/classrooms/JoinClassroomDialog'
 import Square from '../components/classrooms/Square'
 
 const studentshape = PropTypes.shape({
@@ -127,7 +127,7 @@ const mapStateToProps = ({ currentUser, classrooms }, { match }) => {
 
 export default connect(mapStateToProps, {
   subscribeToWebsocket,
-  fetchOneclassroom,
-  fetchstudents,
-  patchclassroom
+  fetchOneClassroom,
+  fetchStudents,
+  patchClassroom
 })(classroom)

@@ -2,9 +2,9 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import fetchclassrooms, { fetchstudents } from '../actions/classrooms/fetch'
+import fetchClassrooms, { fetchStudents } from '../actions/classrooms/fetch'
 import { connect as subscribeToWebsocket } from '../actions/websocket'
-import CreateclassroomButton from '../components/classrooms/CreateclassroomButton'
+import CreateClassroomButton from '../components/classrooms/CreateClassroomButton'
 import Paper from 'material-ui/Paper'
 import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/MenuItem'
@@ -40,7 +40,7 @@ class Lobby extends PureComponent {
     let ActionIcon = this.isJoinable(classroom) ? JoinclassroomIcon : WatchclassroomIcon
     if (this.isPlayer(classroom)) ActionIcon = this.isPlayable(classroom) ? PlayclassroomIcon : WaitingIcon
 
-    if (!classroom.playerOne) { this.props.fetchstudents(classroom) }
+    if (!classroom.playerOne) { this.props.fetchStudents(classroom) }
 
     const title = [classroom.playerOne, classroom.playerTwo]
       .filter(n => !!n)
@@ -61,7 +61,7 @@ class Lobby extends PureComponent {
     return (
       <div className="Lobby">
         <h1>Lobby!</h1>
-        <CreateclassroomButton />
+        <CreateClassroomButton />
         <Paper className="paper">
           <Menu>
             {this.props.classrooms.map(this.renderclassroom)}
@@ -74,4 +74,4 @@ class Lobby extends PureComponent {
 
 const mapStateToProps = ({ classrooms, currentUser }) => ({ classrooms, currentUser })
 
-export default connect(mapStateToProps, { fetchclassrooms, subscribeToWebsocket, fetchstudents, push })(Lobby)
+export default connect(mapStateToProps, { fetchClassrooms, subscribeToWebsocket, fetchStudents, push })(Lobby)

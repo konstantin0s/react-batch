@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 import StarIcon from 'material-ui/svg-icons/action/favorite'
-import createclassroom from '../../actions/classrooms/create'
+import createClassroom from '../../actions/classrooms/create'
 
-class CreateclassroomButton extends PureComponent {
+class CreateClassroomButton extends PureComponent {
   static propTypes = {
     signedIn: PropTypes.bool,
   }
@@ -15,11 +15,11 @@ class CreateclassroomButton extends PureComponent {
     if (!this.props.signedIn) return null
 
     return (
-      <div className="CreateclassroomButton">
+      <div className="CreateClassroomButton">
         <RaisedButton
           label="Create classroom"
           primary={true}
-          onClick={this.props.createclassroom}
+          onClick={this.props.createClassroom}
           icon={<StarIcon />} />
       </div>
     )
@@ -30,4 +30,4 @@ const mapStateToProps = ({ currentUser }) => ({
   signedIn: !!currentUser && !!currentUser._id,
 })
 
-export default connect(mapStateToProps, { createclassroom })(CreateclassroomButton)
+export default connect(mapStateToProps, { createClassroom })(CreateClassroomButton)

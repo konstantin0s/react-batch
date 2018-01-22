@@ -1,4 +1,4 @@
-GA// src/actions/CLASSROOMs/fetch.js
+// src/actions/CLASSROOMs/fetch.js
 
 import API from '../../api/client'
 import {
@@ -50,8 +50,8 @@ export const fetchStudents = (classroom) => {
         dispatch({
           type: CLASSROOM_STUDENTS_UPDATED,
           payload: {
-            CLASSROOM,
-            students: result.body
+            FETCHED_CLASSROOMS,
+            // students: result.body
           }
         })
       })
