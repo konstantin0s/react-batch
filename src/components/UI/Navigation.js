@@ -6,10 +6,10 @@ import { push } from 'react-router-redux'
 import signOut from '../../actions/user/sign-out'
 import AppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton'
-// import PlayclassroomIcon from 'material-ui/svg-icons/hardware/videoclassroom-asset'
+import GameIcon from 'material-ui/svg-icons/hardware/videogame-asset'
 import FlatButton from 'material-ui/FlatButton'
 
-const TITLE = 'Play Memory'
+const TITLE = 'Classroom'
 
 class Navigation extends PureComponent {
   static propTypes = {

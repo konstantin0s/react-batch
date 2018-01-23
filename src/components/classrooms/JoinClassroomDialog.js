@@ -18,9 +18,9 @@ class JoinclassroomDialog extends PureComponent {
   }
 
   render() {
-    const { currentUser, open, isPlayer } = this.props
+    const { currentUser, open, isStudent } = this.props
 
-    if (isPlayer) return null
+    if (isStudent) return null
 
     const actions = [
       <Link to="/">
@@ -55,15 +55,15 @@ class JoinclassroomDialog extends PureComponent {
 const mapStateToProps = ({ currentUser, classrooms }, { classroomId }) => {
   const currentUserId = currentUser && currentUser._id
   const classroom = classrooms.filter((g) => (g._id === classroomId))[0]
-  const isPlayer = classroom && currentUserId &&
-    (classroom.playerOneId === currentUserId || classroom.playerTwoId === currentUserId)
-  const isJoinable = classroom && !isPlayer &&
-    (!classroom.playerOneId || !classroom.playerTwoId)
+  const isStudent = classroom && currentUserId &&
+    (classroom.studentOneId === currentUserId || classroom.studentTwoId === currentUserId)
+  const isJoinable = classroom && !isStudent &&
+    (!classroom.studentOneId || !classroom.studentTwoId)
 
   return {
     classroom,
     currentUser,
-    isPlayer,
+    isStudent,
     open: isJoinable
   }
 }

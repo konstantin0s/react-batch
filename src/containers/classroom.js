@@ -24,18 +24,18 @@ class classroom extends PureComponent {
       _id: PropTypes.string.isRequired,
       board: PropTypes.arrayOf(PropTypes.string),
       userId: PropTypes.string.isRequired,
-      playerOneId: PropTypes.string,
-      playerOne: studentshape,
-      playerTwoId: PropTypes.string,
-      playerTwo: studentshape,
+      studentOneId: PropTypes.string,
+      studentOne: studentshape,
+      studentTwoId: PropTypes.string,
+      studentTwo: studentshape,
       draw: PropTypes.bool,
       updatedAt: PropTypes.string.isRequired,
       createdAt: PropTypes.string.isRequired,
     }),
     turn: PropTypes.number.isRequired,
     started: PropTypes.bool,
-    isPlayer: studentshape,
-    isPlayer: PropTypes.bool,
+    isStudent: studentshape,
+    isStudent: PropTypes.bool,
     isJoinable: PropTypes.bool,
     hasTurn: PropTypes.bool
   }
@@ -51,7 +51,7 @@ class classroom extends PureComponent {
   componentWillReceiveProps(nextProps) {
     const { classroom } = nextProps
 
-    if (classroom && !classroom.playerOne) {
+    if (classroom && !classroom.studentOne) {
       this.props.fetchstudents(classroom)
     }
   }
@@ -77,7 +77,7 @@ class classroom extends PureComponent {
 
     if (!classroom) return null
 
-    const title = [classroom.playerOne, classroom.playerTwo]
+    const title = [classroom.studentOne, classroom.studentTwo]
       .filter(n => !!n)
       .map(p => (p.name || null))
       .filter(n => !!n)
@@ -106,19 +106,19 @@ const mapStateToProps = ({ currentUser, classrooms }, { match }) => {
   const currentUserId = currentUser && currentUser._id
   const squaresFilled = (classroom && classroom.board.filter(s => !!s).length) || 0
   const started = squaresFilled > 0
-  const isPlayer = classroom && currentUserId &&
-    (classroom.playerOneId === currentUserId || classroom.playerTwoId === currentUserId)
+  const isStudent = classroom && currentUserId &&
+    (classroom.studentOneId === currentUserId || classroom.studentTwoId === currentUserId)
   const turn = squaresFilled % 2
-  const hasTurn = isPlayer &&
-    (turn === 0 && classroom.playerOneId === currentUserId) ||
-    (turn === 1 && classroom.playerTwoId === currentUserId)
-  const isJoinable = classroom && !isPlayer &&
-    (!classroom.playerOneId || !classroom.playerTwoId)
+  const hasTurn = isStudent &&
+    (turn === 0 && classroom.studentOneId === currentUserId) ||
+    (turn === 1 && classroom.studentTwoId === currentUserId)
+  const isJoinable = classroom && !isStudent &&
+    (!classroom.studentOneId || !classroom.studentTwoId)
 
   return {
-    isPlayer,
+    isStudent,
     classroom,
-    isPlayer,
+    isStudent,
     hasTurn,
     isJoinable,
     squaresFilled

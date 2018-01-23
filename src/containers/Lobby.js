@@ -10,7 +10,7 @@ import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/MenuItem'
 import WatchclassroomIcon from 'material-ui/svg-icons/image/remove-red-eye'
 import JoinclassroomIcon from 'material-ui/svg-icons/social/person-add'
-// import PlayclassroomIcon from 'material-ui/svg-icons/hardware/videoclassroom-asset'
+import GameIcon from 'material-ui/svg-icons/hardware/videogame-asset'
 import WaitingIcon from 'material-ui/svg-icons/image/timelapse'
 import './Lobby.css'
 
@@ -23,48 +23,48 @@ class Lobby extends PureComponent {
   goToclassroom = classroomId => event => this.props.push(`/play/${classroomId}`)
 
   isJoinable(classroom) {
-    return !classroom.playerOneId || !classroom.playerTwoId
+    return !classroom.studentOneId || !classroom.studentTwoId
   }
 
-  isPlayer(classroom) {
+  isStudent(classroom) {
     if (!this.props.currentUser) { return false }
-    return classroom.playerOneId === this.props.currentUser._id ||
-      classroom.playerTwoId === this.props.currentUser._id
+    return classroom.studentOneId === this.props.currentUser._id ||
+      classroom.studentTwoId === this.props.currentUser._id
   }
 
   isPlayable(classroom) {
-    return this.isPlayer(classroom) && !this.isJoinable(classroom)
+    return this.isStudent(classroom) && !this.isJoinable(classroom)
   }
 
-  // renderclassroom = (classroom, index) => {
-  //   let ActionIcon = this.isJoinable(classroom) ? JoinclassroomIcon : WatchclassroomIcon
-  //   if (this.isPlayer(classroom)) ActionIcon = this.isPlayable(classroom) ? PlayclassroomIcon : WaitingIcon
-  //
-  //   if (!classroom.playerOne) { this.props.fetchStudents(classroom) }
-  //
-  //   const title = [classroom.playerOne, classroom.playerTwo]
-  //     .filter(n => !!n)
-  //     .map(p => (p.name || null))
-  //     .filter(n => !!n)
-  //     .join(' vs ')
-  //
-  //   return (
-  //     <MenuItem
-  //       key={index}
-  //       onClick={this.goToclassroom(classroom._id)}
-  //       rightIcon={<ActionIcon />}
-  //       primaryText={title} />
-  //   )
-  // }
+  renderclassroom = (classroom, index) => {
+    let ActionIcon = this.isJoinable(classroom) ? JoinclassroomIcon : WatchclassroomIcon
+    if (this.isStudent(classroom)) ActionIcon = this.isPlayable(classroom) ? GameIcon  : WaitingIcon
 
+    if (!classroom.studentOne) { this.props.fetchStudents(classroom) }
+
+    const title = [classroom.studentOne, classroom.studentTwo]
+      .filter(n => !!n)
+      .map(p => (p.name || null))
+      .filter(n => !!n)
+      .join(' vs ')
+
+    return (
+      <MenuItem
+        key={index}
+        onClick={this.goToclassroom(classroom._id)}
+        rightIcon={<ActionIcon />}
+        primaryText={title} />
+    )
+  }
+
+  // {this.props.classroom.map(this.renderclassroom)} this should go below, into the Menu tag
   render() {
     return (
       <div className="Lobby">
-        <h1>Lobby!</h1>
+        <h1>Classrooms!</h1>
         <CreateClassroomButton />
         <Paper className="paper">
           <Menu>
-            {this.props.classroom.map(this.renderclassroom)}
           </Menu>
         </Paper>
       </div>
