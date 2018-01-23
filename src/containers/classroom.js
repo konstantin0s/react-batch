@@ -95,7 +95,7 @@ class classroom extends PureComponent {
         <h2>Debug Props</h2>
         <pre>{JSON.stringify(this.props, true, 2)}</pre>
 
-        <JoinclassroomDialog classroomId={classroom._id} />
+        <JoinClassroomDialog classroomId={classroom._id} />
       </div>
     )
   }
@@ -129,5 +129,5 @@ export default connect(mapStateToProps, {
   subscribeToWebsocket,
   fetchOneClassroom,
   fetchStudents,
-  patchClassroom
+  patchClassroom,
 })(classroom)

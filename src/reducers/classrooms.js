@@ -4,8 +4,8 @@ import {
   CLASSROOM_CREATED,
   CLASSROOM_UPDATED,
   CLASSROOM_REMOVED,
-  CLASSROOM_students_UPDATED,
-} from '../actions/classroms/subscribe'
+  CLASSROOM_STUDENTS_UPDATED,
+} from '../actions/classrooms/subscribe'
 
 export default (state = [], { type, payload } = {}) => {
   switch (type) {
@@ -49,7 +49,7 @@ export default (state = [], { type, payload } = {}) => {
       })
 
     case CLASSROOM_REMOVED :
-        return state.filter((classroom) => (CLASSROOM._id !== payload._id))
+        return state.filter((classroom) => (classroom._id !== payload._id))
 
     default :
       return state
