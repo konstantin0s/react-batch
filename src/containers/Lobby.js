@@ -10,13 +10,13 @@ import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/MenuItem'
 import WatchclassroomIcon from 'material-ui/svg-icons/image/remove-red-eye'
 import JoinclassroomIcon from 'material-ui/svg-icons/social/person-add'
-import PlayclassroomIcon from 'material-ui/svg-icons/hardware/videoclassroom-asset'
+// import PlayclassroomIcon from 'material-ui/svg-icons/hardware/videoclassroom-asset'
 import WaitingIcon from 'material-ui/svg-icons/image/timelapse'
 import './Lobby.css'
 
 class Lobby extends PureComponent {
   componentWillMount() {
-    this.props.fetchclassrooms()
+    this.props.fetchClassrooms()
     this.props.subscribeToWebsocket()
   }
 
@@ -36,26 +36,26 @@ class Lobby extends PureComponent {
     return this.isPlayer(classroom) && !this.isJoinable(classroom)
   }
 
-  renderclassroom = (classroom, index) => {
-    let ActionIcon = this.isJoinable(classroom) ? JoinclassroomIcon : WatchclassroomIcon
-    if (this.isPlayer(classroom)) ActionIcon = this.isPlayable(classroom) ? PlayclassroomIcon : WaitingIcon
-
-    if (!classroom.playerOne) { this.props.fetchStudents(classroom) }
-
-    const title = [classroom.playerOne, classroom.playerTwo]
-      .filter(n => !!n)
-      .map(p => (p.name || null))
-      .filter(n => !!n)
-      .join(' vs ')
-
-    return (
-      <MenuItem
-        key={index}
-        onClick={this.goToclassroom(classroom._id)}
-        rightIcon={<ActionIcon />}
-        primaryText={title} />
-    )
-  }
+  // renderclassroom = (classroom, index) => {
+  //   let ActionIcon = this.isJoinable(classroom) ? JoinclassroomIcon : WatchclassroomIcon
+  //   if (this.isPlayer(classroom)) ActionIcon = this.isPlayable(classroom) ? PlayclassroomIcon : WaitingIcon
+  //
+  //   if (!classroom.playerOne) { this.props.fetchStudents(classroom) }
+  //
+  //   const title = [classroom.playerOne, classroom.playerTwo]
+  //     .filter(n => !!n)
+  //     .map(p => (p.name || null))
+  //     .filter(n => !!n)
+  //     .join(' vs ')
+  //
+  //   return (
+  //     <MenuItem
+  //       key={index}
+  //       onClick={this.goToclassroom(classroom._id)}
+  //       rightIcon={<ActionIcon />}
+  //       primaryText={title} />
+  //   )
+  // }
 
   render() {
     return (
@@ -64,7 +64,7 @@ class Lobby extends PureComponent {
         <CreateClassroomButton />
         <Paper className="paper">
           <Menu>
-            {this.props.classrooms.map(this.renderclassroom)}
+            {this.props.classroom.map(this.renderclassroom)}
           </Menu>
         </Paper>
       </div>
