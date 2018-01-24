@@ -2,14 +2,14 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import fetchClassrooms, { fetchStudents } from '../actions/classrooms/fetch'
+import fetchClassrooms from '../actions/classrooms/fetch'
 import { connect as subscribeToWebsocket } from '../actions/websocket'
 import CreateClassroomButton from '../components/classrooms/CreateClassroomButton'
 import Paper from 'material-ui/Paper'
 import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/MenuItem'
-import WatchclassroomIcon from 'material-ui/svg-icons/image/remove-red-eye'
-import JoinclassroomIcon from 'material-ui/svg-icons/social/person-add'
+import WatchClassroomIcon from 'material-ui/svg-icons/image/remove-red-eye'
+import JoinClassroomIcon from 'material-ui/svg-icons/social/person-add'
 import GameIcon from 'material-ui/svg-icons/hardware/videogame-asset'
 import WaitingIcon from 'material-ui/svg-icons/image/timelapse'
 import './Lobby.css'
@@ -20,7 +20,7 @@ class Lobby extends PureComponent {
     this.props.subscribeToWebsocket()
   }
 
-  goToclassroom = classroomId => event => this.props.push(`/play/${classroomId}`)
+  goToClassroom = classroomId => event => this.props.push(`/play/${classroomId}`)
 
   isJoinable(classroom) {
     return !classroom.studentOneId || !classroom.studentTwoId
@@ -36,9 +36,9 @@ class Lobby extends PureComponent {
     return this.isStudent(classroom) && !this.isJoinable(classroom)
   }
 
-  renderclassroom = (classroom, index) => {
-    let ActionIcon = this.isJoinable(classroom) ? JoinclassroomIcon : WatchclassroomIcon
-    if (this.isStudent(classroom)) ActionIcon = this.isPlayable(classroom) ? GameIcon  : WaitingIcon
+  renderClassroom = (classroom, index) => {
+    let ActionIcon = this.isJoinable(classroom) ? JoinClassroomIcon : WatchClassroomIcon
+    if (this.isStudent(classroom)) ActionIcon = this.isPlayable(classroom) ? JoinClassroomIcon  : WaitingIcon
 
     if (!classroom.studentOne) { this.props.fetchStudents(classroom) }
 
@@ -51,13 +51,13 @@ class Lobby extends PureComponent {
     return (
       <MenuItem
         key={index}
-        onClick={this.goToclassroom(classroom._id)}
+        onClick={this.goToClassroom(classroom._id)}
         rightIcon={<ActionIcon />}
         primaryText={title} />
     )
   }
+  // {this.props.classrooms.map(this.renderClassroom)} //this should go below, into the Menu tag
 
-  // {this.props.classroom.map(this.renderclassroom)} this should go below, into the Menu tag
   render() {
     return (
       <div className="Lobby">
@@ -74,4 +74,4 @@ class Lobby extends PureComponent {
 
 const mapStateToProps = ({ classrooms, currentUser }) => ({ classrooms, currentUser })
 
-export default connect(mapStateToProps, { fetchClassrooms, subscribeToWebsocket, fetchStudents, push })(Lobby)
+export default connect(mapStateToProps, { fetchClassrooms, subscribeToWebsocket, push })(Lobby)

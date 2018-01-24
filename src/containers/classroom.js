@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { fetchOneClassroom, fetchStudents } from '../actions/classrooms/fetch'
+import { fetchClassrooms, fetchOneClassroom } from '../actions/classrooms/fetch'
 import patchClassroom from '../actions/classrooms/patch'
 import { connect as subscribeToWebsocket } from '../actions/websocket'
 import JoinClassroomDialog from '../components/classrooms/JoinClassroomDialog'
@@ -16,28 +16,13 @@ const squareStyles = { display: 'flex', flexFlow: 'row wrap', width: 305, height
 
 class classroom extends PureComponent {
   static propTypes = {
-    fetchOneclassroom: PropTypes.func.isRequired,
-    fetchstudents: PropTypes.func.isRequired,
-    subscribeToWebsocket: PropTypes.func.isRequired,
-    patchclassroom: PropTypes.func.isRequired,
-    classroom: PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      board: PropTypes.arrayOf(PropTypes.string),
-      userId: PropTypes.string.isRequired,
-      studentOneId: PropTypes.string,
-      studentOne: studentshape,
-      studentTwoId: PropTypes.string,
-      studentTwo: studentshape,
-      draw: PropTypes.bool,
-      updatedAt: PropTypes.string.isRequired,
-      createdAt: PropTypes.string.isRequired,
-    }),
-    turn: PropTypes.number.isRequired,
-    started: PropTypes.bool,
-    isStudent: studentshape,
-    isStudent: PropTypes.bool,
-    isJoinable: PropTypes.bool,
-    hasTurn: PropTypes.bool
+    fetchEvaluations: PropTypes.func.isRequired,
+    fetchStudents: PropTypes.func.isRequired,
+    fetchOneClassroom: PropTypes.func.isRequired,
+    fetchClassroomStudents: PropTypes.func.isRequired,
+    fetchOneStudent : PropTypes.func.isRequired
+
+
   }
 
   componentWillMount() {
@@ -128,6 +113,6 @@ const mapStateToProps = ({ currentUser, classrooms }, { match }) => {
 export default connect(mapStateToProps, {
   subscribeToWebsocket,
   fetchOneClassroom,
-  fetchStudents,
+
   patchClassroom,
 })(classroom)

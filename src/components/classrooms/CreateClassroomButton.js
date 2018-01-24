@@ -17,7 +17,7 @@ class CreateClassroomButton extends PureComponent {
     return (
       <div className="CreateClassroomButton">
         <RaisedButton
-          label="Create classroom"
+          label="Create Classroom"
           primary={true}
           onClick={this.props.createClassroom}
           icon={<StarIcon />} />

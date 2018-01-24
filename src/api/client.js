@@ -8,12 +8,12 @@ export default class ApiClient {
   }
 
   constructor(host, options = {}) {
-    this.host = process.env.NODE_ENV === 'production'
-      ? 'https://expert-chinbone.codaisseur.cloud' // WITHOUT the / !!!
-      : (host || 'http://localhost:3030')
+      this.host = process.env.NODE_ENV === 'production'
+        ? 'https://expert-chinbone.codaisseur.cloud' // WITHOUT the / !!!
+        : (host || 'http://localhost:3030')
 
-    this.options = { ...this.defaultOptions, ...options }
-  }
+      this.options = { ...this.defaultOptions, ...options }
+    }
 
   // Authenticate and store the token
   //
