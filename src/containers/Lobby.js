@@ -56,7 +56,6 @@ class Lobby extends PureComponent {
         primaryText={title} />
     )
   }
-  // {this.props.classrooms.map(this.renderClassroom)} //this should go below, into the Menu tag
 
   render() {
     return (
@@ -65,6 +64,7 @@ class Lobby extends PureComponent {
         <CreateClassroomButton />
         <Paper className="paper">
           <Menu>
+          {this.props.classrooms.map(this.renderClassroom)} //this should go below, into the Menu tag
           </Menu>
         </Paper>
       </div>

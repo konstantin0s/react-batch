@@ -10,31 +10,27 @@ const PLACEHOLDER = 'http://via.placeholder.com/500x180?text=No%20Image'
 
 class ClassroomItem extends PureComponent {
   static propTypes = {
-    batchNo: PropTypes.number.isRequired,
+    batchNr: PropTypes.number.isRequired,
     startAt: PropTypes.date,
     endAt: PropTypes.date
   }
 
   render() {
-    const { _id, batchNo, startAt, endAt } = this.props
+    const { _id, batchNr, startAt, endAt } = this.props
     // const categories = { vegan, vegetarian, pescatarian }
 
+    // <div className="cover"
+    // style={{ backgroundImage: `url(${pic || PLACEHOLDER })` }} />
     return(
       <article className="ClassroomItem">
         <header>
-          <div
-            className="cover"
-            style={{ backgroundImage: `url(${photo || PLACEHOLDER })` }} />
 
           <h1>
             <Link to={`/classrooms/${_id}`}>
-              <p> Classroom: {batchNo} </p>
+              <p> Classroom: {batchNr} </p>
             </Link>
           </h1>
 
-          // <ul className="categories">
-          //   <RecipeCategory { ...categories } />
-          // </ul>
         </header>
         <div>
             <label><p>Starts at: {startAt}</p></label>
@@ -44,5 +40,9 @@ class ClassroomItem extends PureComponent {
     )
   }
 }
+// <ul className="categories">
+//   <RecipeCategory { ...categories } />
+// </ul>
 
-export default connect(null, mapDispatchToProps)(ClassroomItem)
+export default connect(null)(ClassroomItem)
+// (null, mapDispatchToProps)
