@@ -36,7 +36,7 @@ export default (state = [], { type, payload } = {}) => {
         return classroom
       })
 
-    case CLASSROOM_STUDENTS_UPDATED :  // check this line in the code and see from where is comming and change from students to students
+    case CLASSROOM_STUDENTS_UPDATED :  // check this line in the code and change it to students
       return state.map((classroom) => {
         if (classroom._id === payload.classroom._id) {
           return {

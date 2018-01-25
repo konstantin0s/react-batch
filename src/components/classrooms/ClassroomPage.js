@@ -14,13 +14,13 @@ export class ClassroomPage extends PureComponent {
   }
 
   render() {
-    const { batchNo } = this.props
+    const { batchNr } = this.props
 
-    if (!batchNo) return null
+    if (!batchNr) return null
 
     return (
       <div className="classroom page">
-        <Title content={batchNo} />
+        <Title content={ batchNr } />
       </div>
     )
   }
