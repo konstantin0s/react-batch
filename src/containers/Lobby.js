@@ -5,6 +5,8 @@ import { push } from 'react-router-redux'
 import fetchClassrooms from '../actions/classrooms/fetch'
 import { connect as subscribeToWebsocket } from '../actions/websocket'
 import CreateClassroomButton from '../components/classrooms/CreateClassroomButton'
+import { fetchOneClassroom } from '../../actions/classrooms/fetch'
+import fetchStudents from '../../actions/classrooms/fetch'
 import Paper from 'material-ui/Paper'
 import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/MenuItem'
@@ -18,55 +20,24 @@ class Lobby extends PureComponent {
   componentWillMount() {
     this.props.fetchClassrooms()
     this.props.subscribeToWebsocket()
+    this.props.fetchStudents()
   }
 
-  goToClassroom = classroomId => event => this.props.push(`/play/${classroomId}`)
-
-  isJoinable(classroom) {
-    return !classroom.studentOneId || !classroom.studentTwoId
-  }
-
-  isStudent(classroom) {
-    if (!this.props.currentUser) { return false }
-    return classroom.studentOneId === this.props.currentUser._id ||
-      classroom.studentTwoId === this.props.currentUser._id
-  }
-
-  isPlayable(classroom) {
-    return this.isStudent(classroom) && !this.isJoinable(classroom)
-  }
-
-  renderClassroom = (classroom, index) => {
-    let ActionIcon = this.isJoinable(classroom) ? JoinClassroomIcon : WatchClassroomIcon
-    if (this.isStudent(classroom)) ActionIcon = this.isPlayable(classroom) ? JoinClassroomIcon  : WaitingIcon
-
-    if (!classroom.studentOne) { this.props.fetchStudents(classroom) }
-
-    const title = [classroom.studentOne, classroom.studentTwo]
-      .filter(n => !!n)
-      .map(p => (p.name || null))
-      .filter(n => !!n)
-      .join(' vs ')
-
-    return (
-      <MenuItem
-        key={index}
-        onClick={this.goToClassroom(classroom._id)}
-        rightIcon={<ActionIcon />}
-        primaryText={title} />
-    )
+  fechClassroom(id){
+    this.props.push(`/classroom/${id}`)
+    this.props.fetchOneClassroom(id)
   }
 
   render() {
-    return (
+    return(
       <div className="Lobby">
-        <h1>Classrooms!</h1>
-        <CreateClassroomButton />
-        <Paper className="paper">
-          <Menu>
-          {this.props.classrooms.map(this.renderClassroom)} //this should go below, into the Menu tag
-          </Menu>
-        </Paper>
+         <h1>Classrooms</h1>
+           <CreateClassroomButton />
+             <Paper className="paper">
+               <Menu>
+                  { this.props.batches.map((classroom,index) => <h3 className="box" key={ index } onClick={this.fetchClassroom.bind(this, classroom._id)} > #{ classroom.batchNumber } <p className="dates">Runs from {classroom.startAt.substring(8, 10) + - + classroom.startAt.substring(5, 7)} until {classroom.endAt.substring(8, 10) + - +  classroom.endAt.substring(5, 7)}</p></h3>) }
+               </Menu>
+             </Paper>
       </div>
     )
   }
