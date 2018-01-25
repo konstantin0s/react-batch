@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react'
 // import Title from '../components/Title'
 import ClassroomItem from './ClassroomItem'
+import { connect } from 'react-redux'
+import ClassroomEditor from './ClassroomEditor'
+import './ClassroomContainer.sass'
 
 class ClassroomContainer extends PureComponent {
   renderClassroom(classroom, index) {

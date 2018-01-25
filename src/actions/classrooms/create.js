@@ -8,25 +8,16 @@ import {
   LOAD_SUCCESS
 } from '../loading'
 
-export const CREATE_CLASSROOM = 'CREATE_CLASSROOM'
-
-
 const api = new API()
 
-export default () => {
+export const createClassroom = (newClassroom) => {
   return (dispatch) => {
     dispatch({ type: APP_LOADING })
 
-    api.post('/classrooms', classroom)
+    api.post('/classrooms', {})
       .then(() => {
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })
-
-        dispatch({
-          type: CREATE_CLASSROOM,
-          payload: result.body
-        })
-
       })
       .catch((error) => {
         dispatch({ type: APP_DONE_LOADING })

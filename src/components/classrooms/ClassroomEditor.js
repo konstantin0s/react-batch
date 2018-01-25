@@ -4,9 +4,10 @@ import toMarkdown from 'to-markdown'
 import { connect } from 'react-redux'
 import 'medium-editor/dist/css/medium-editor.css'
 import 'medium-editor/dist/css/themes/default.css'
-import CreateClassroom from '../actions/classrooms/create'
-import './ClassroomEditor.css'
-import Title from '../components/Title'
+import { createClassroom } from '../../actions/classrooms/create'
+import './ClassroomEditor.sass'
+import Title from '../../components/UI/Title'
+
 
 class ClassroomEditor extends PureComponent {
   constructor(props) {
@@ -101,6 +102,6 @@ class ClassroomEditor extends PureComponent {
   }
 }
 
-const mapDispatchToProps = { save: CreateClassroom }
+const mapDispatchToProps = { save: createClassroom }
 
 export default connect(null, mapDispatchToProps)(ClassroomEditor)
