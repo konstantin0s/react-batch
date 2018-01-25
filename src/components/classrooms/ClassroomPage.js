@@ -6,7 +6,13 @@ import Title from '../components/Title'
 
 export class ClassroomPage extends PureComponent {
   static propTypes = {
-    fetch: PropTypes.string,
+    fetchOneClassroom: PropTypes.func.isRequired,
+    classroom: PropTypes.shape({
+      batchNr: PropTypes.number,
+      startAt: PropTypes.string.isRequired,
+      endAt: PropTypes.string.isRequired,
+
+    })
   }
 
   componentWillMount() {

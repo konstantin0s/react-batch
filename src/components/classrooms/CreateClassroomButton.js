@@ -22,7 +22,7 @@ class CreateClassroomButton extends PureComponent {
         <RaisedButton
         label=""
         primary={true}
-        onClick={() => alert("ZZZ :)")}
+        onClick={() => alert("zZZZzzZZZZzzz")}
         icon={<StarIcon />} />
       </div>
     )

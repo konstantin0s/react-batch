@@ -39,9 +39,10 @@ class App extends Component {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div className="App">
+        { this.props.children }
           <Navigation />
+          <ClassroomContainer classrooms={ classrooms } />
           <Routes />
-           <ClassroomContainer classrooms={ classrooms } />
         </div>
       </MuiThemeProvider>
     )

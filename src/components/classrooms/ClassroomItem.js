@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { format } from 'date-fns'
 
 class ClassroomItem extends PureComponent {
   static propTypes ={
@@ -21,8 +22,9 @@ class ClassroomItem extends PureComponent {
       <article className="Classroom">
         <h1><Link to={`/classrooms/${_id}`}>Classroom { batchNr }</Link> </h1>
         <div>
-          <h4> Start date:  { startAt } </h4>
-          <h4> End date:  { endAt } </h4>
+          <h4>Starting at: { format(startAt, 'D MMMM YYYY') } <br />
+           Ending at: { format(endAt, 'D MMMM YYYY') }</h4>
+
         </div>
       </article>
     )

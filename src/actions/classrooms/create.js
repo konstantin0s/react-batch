@@ -10,11 +10,13 @@ import {
 
 const api = new API()
 
+export const CLASSROOM_CREATED = 'CLASSROOM_CREATED'
+
 export const createClassroom = (newClassroom) => {
   return (dispatch) => {
     dispatch({ type: APP_LOADING })
 
-    api.post('/classrooms', {})
+    api.post('/classrooms', newClassroom)
       .then(() => {
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })
