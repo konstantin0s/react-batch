@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { fetchClassroomById } from '../actions/classrooms'
+import { fetchOneClassroom } from '../actions/classrooms'
 import Title from '../components/Title'
 
 export class ClassroomPage extends PureComponent {
-  // static propTypes = {
-  //   title: PropTypes.string,
-  // }
+  static propTypes = {
+    fetch: PropTypes.string,
+  }
 
   componentWillMount() {
     this.props.dispatch(fetchClassroomById())

@@ -1,14 +1,17 @@
-// src/components/classrooms/CreateclassroomButton.js
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
-import StarIcon from 'material-ui/svg-icons/action/favorite'
-import createClassroom from '../../actions/classrooms/create'
+import StarIcon from 'material-ui-icons/SentimentSatisfied.js'
+import createClassroom from '../../actions/batches/create'
 
 class CreateClassroomButton extends PureComponent {
   static propTypes = {
     signedIn: PropTypes.bool,
+  }
+
+  alert(){
+    window.alert();
   }
 
   render() {
@@ -17,10 +20,10 @@ class CreateClassroomButton extends PureComponent {
     return (
       <div className="CreateClassroomButton">
         <RaisedButton
-          label="Create Classroom"
-          primary={true}
-          onClick={this.props.createClassroom}
-          icon={<StarIcon />} />
+        label=""
+        primary={true}
+        onClick={() => alert("ZZZ :)")}
+        icon={<StarIcon />} />
       </div>
     )
   }
