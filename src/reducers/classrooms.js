@@ -1,5 +1,5 @@
 // src/reducers/CLASSROOMs.js
-import { FETCHED_CLASSROOMS, FETCHED_ONE_CLASSROOM } from '../actions/classrooms/fetch'
+import { createClassroom, FETCHED_CLASSROOMS, FETCHED_ONE_CLASSROOM } from '../actions/classrooms/fetch'
 import {
   CLASSROOM_CREATED,
   CLASSROOM_UPDATED,
@@ -36,17 +36,17 @@ export default (state = [], { type, payload } = {}) => {
         return classroom
       })
 
-    case CLASSROOM_STUDENTS_UPDATED :  // check this line in the code and change it to students
-      return state.map((classroom) => {
-        if (classroom._id === payload.classroom._id) {
-          return {
-            ...payload.classroom,
-            studentOne: payload.students[0],
-            studentTwo: payload.students[1]
-          }
-        }
-        return classroom
-      })
+    // case CLASSROOM_STUDENTS_UPDATED :  // check this line in the code and change it to students
+    //   return state.map((classroom) => {
+    //     if (classroom._id === payload.classroom._id) {
+    //       return {
+    //         ...payload.classroom,
+    //         studentOne: payload.students[0],
+    //         studentTwo: payload.students[1]
+    //       }
+    //     }
+    //     return classroom
+    //   })
 
     case CLASSROOM_REMOVED :
         return state.filter((classroom) => (classroom._id !== payload._id))

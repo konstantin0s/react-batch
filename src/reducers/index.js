@@ -8,5 +8,5 @@ export default {
   loading,
   loadError,
   currentUser,
-  classrooms,
+  classrooms
 }
